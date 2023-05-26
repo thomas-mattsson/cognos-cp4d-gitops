@@ -1,0 +1,7 @@
+apiVersion: ca.cpd.ibm.com/v1
+kind: CAService
+metadata:
+  name: ca-addon-cr
+spec:
+  blockStorageClass: ibmc-block-gold
+  fileStorageClass: ibmc-file-gold-gid
