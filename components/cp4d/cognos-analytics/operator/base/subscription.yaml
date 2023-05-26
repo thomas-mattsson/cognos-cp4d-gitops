@@ -1,0 +1,10 @@
+apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  name: ibm-cognos-analytics
+spec:
+  channel: v23.5
+  installPlanApproval: Automatic
+  name: ibm-ca-operator
+  source: ibm-operator-catalog
+  sourceNamespace: openshift-marketplace
