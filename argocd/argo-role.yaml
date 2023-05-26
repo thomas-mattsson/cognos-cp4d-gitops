@@ -7,5 +7,7 @@ rules:
       - '*'
     apiGroups:
       - cpd.ibm.com
+      - ca.cpd.ibm.com
     resources:
       - ibmcpds
+      - caservices
