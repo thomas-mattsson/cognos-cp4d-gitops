@@ -10,7 +10,7 @@ spec:
   source:
     repoURL: https://github.com/thomas-mattsson/cognos-cp4d-gitops.git
     targetRevision: 'HEAD'
-    path: 'components/cp4d/operator'
+    path: 'components/cp4d/operator/base'
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: 'openshift-operators'
