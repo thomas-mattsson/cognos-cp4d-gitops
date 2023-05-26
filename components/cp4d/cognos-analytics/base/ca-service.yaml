@@ -1,0 +1,15 @@
+apiVersion: ca.cpd.ibm.com/v1
+kind: CAService
+metadata:
+  labels:
+    app.kubernetes.io/instance: ibm-ca-operator
+    app.kubernetes.io/managed-by: ibm-ca-operator
+    app.kubernetes.io/name: ibm-ca-operator
+  name: ca-addon-cr
+  namespace: openshift-operators
+spec:
+  blockStorageClass: PATCHED_BY_KUSTOMIZE
+  fileStorageClass: PATCHED_BY_KUSTOMIZE
+  license:
+    accept: true
+  version: 23.5.0
