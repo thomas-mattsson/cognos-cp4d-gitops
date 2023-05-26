@@ -6,7 +6,6 @@ metadata:
     app.kubernetes.io/managed-by: ibm-ca-operator
     app.kubernetes.io/name: ibm-ca-operator
   name: ca-addon-cr
-  namespace: openshift-operators
 spec:
   blockStorageClass: PATCHED_BY_KUSTOMIZE
   fileStorageClass: PATCHED_BY_KUSTOMIZE
