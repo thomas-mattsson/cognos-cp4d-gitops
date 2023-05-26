@@ -3,10 +3,10 @@ kind: Application
 metadata:
   name: cp4d-control-plane
   namespace: openshift-gitops
-  labels:
-    group: applications
   annotations:
     argocd.argoproj.io/sync-wave: "50"
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
 spec:
   destination:
     namespace: cp4d
