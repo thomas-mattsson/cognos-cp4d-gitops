@@ -9,4 +9,4 @@ resources:
   - common-core-operator.yaml
   - db2-operator.yaml
   - cognos-analytics-operator.yaml
-  - cognos-analytics.yaml
+  - cognos-analytics-addon.yaml
