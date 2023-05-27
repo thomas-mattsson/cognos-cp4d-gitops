@@ -7,5 +7,6 @@ resources:
   - cp4d-operator.yaml
   - cp4d-control-plane.yaml
   - common-core-operator.yaml
+  - db2-operator.yaml
   - cognos-analytics-operator.yaml
   - cognos-analytics.yaml
