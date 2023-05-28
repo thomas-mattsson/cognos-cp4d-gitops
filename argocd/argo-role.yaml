@@ -13,11 +13,11 @@ rules:
       - '*'
     apiGroups:
      - ca.cpd.ibm.com
-    resources
+    resources:
       - caservices
   - verbs:
       - '*'
     apiGroups:
       - db2u.databases.ibm.com
-    resources
+    resources:
       - db2uinstances
