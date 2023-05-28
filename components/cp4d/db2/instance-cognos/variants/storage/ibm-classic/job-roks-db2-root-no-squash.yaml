@@ -3,7 +3,7 @@ kind: Job
 metadata:
   name: roks-db2-root-no-squash
   annotations:
-    argocd.argoproj.io/hook: PreSync
+    argocd.argoproj.io/hook: PostSync
   namespace: openshift-gitops
 spec:
   template:
