@@ -3,3 +3,4 @@ kind: Component
 
 patchesStrategicMerge:
 - storage.yaml
+- job-roks-db2-root-no-squash.yaml
