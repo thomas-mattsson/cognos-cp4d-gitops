@@ -20,6 +20,6 @@ spec:
       - name: BLUDB
     dbType: db2oltp
     disableNodePortService: true
-  storage: {} # PATCHED_BY_KUSTOMIZE
+  storage: [] # PATCHED_BY_KUSTOMIZE
   nodes: 1
   version: s11.5.8.0-cn2
