@@ -6,6 +6,12 @@ rules:
   - verbs:
       - '*'
     apiGroups:
+      - ""
+    resources:
+      - serviceaccounts
+  - verbs:
+      - '*'
+    apiGroups:
       - batch
     resources:
       - jobs
