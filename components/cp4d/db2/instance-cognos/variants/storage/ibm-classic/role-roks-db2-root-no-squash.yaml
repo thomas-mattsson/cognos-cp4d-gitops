@@ -10,3 +10,4 @@ rules:
       - ""
     resources:
       - nodes
+      - namespaces
