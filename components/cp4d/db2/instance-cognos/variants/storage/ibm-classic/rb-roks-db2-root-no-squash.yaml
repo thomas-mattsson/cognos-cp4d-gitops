@@ -7,5 +7,5 @@ subjects:
     name: account-cp4d-db2uinstance-cognos
 roleRef:
   apiGroup: rbac.authorization.k8s.io
-  kind: Role
+  kind: ClusterRole
   name: role-roks-db2-root-no-squash
