@@ -18,3 +18,4 @@ rules:
       - ""
     resources:
       - namespaces
+      - pods
