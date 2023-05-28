@@ -1,0 +1,70 @@
+apiVersion: db2u.databases.ibm.com/v1
+kind: Db2uInstance
+metadata:
+  name: db2uinstance-cognos
+  labels:
+    app.kubernetes.io/instance: db2u-operator
+    app.kubernetes.io/name: db2u-operator
+    app.kubernetes.io/managed-by: Db2U-Team
+spec:
+  license:
+    accept: true
+  account:
+    securityConfig:
+      privilegedSysctlInit: true
+  environment:
+    partitionConfig:
+      volumePerPartition: true
+      total: 2
+    databases:
+      - name: BLUDB
+    dbType: db2oltp
+    disableNodePortService: true
+  storage:
+    - type: create
+      name: meta
+      spec:
+        accessModes:
+          - ReadWriteMany
+        resources:
+          requests:
+            storage: 50Gi
+        storageClassName: ibmc-file-gold-gid
+    - type: template
+      name: data
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 100Gi
+        storageClassName: ibmc-block-gold
+    - type: create
+      name: backup
+      spec:
+        accessModes:
+          - ReadWriteMany
+        resources:
+          requests:
+            storage: 100Gi
+        storageClassName: ibmc-file-gold-gid
+    - type: template
+      name: tempts
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 10Gi
+        storageClassName: ibmc-block-gold
+    - type: create
+      name: archivelogs
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 25Gi
+        storageClassName: ibmc-file-gold-gid
+  nodes: 1
+  version: s11.5.8.0-cn2
