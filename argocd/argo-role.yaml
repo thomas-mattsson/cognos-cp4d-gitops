@@ -7,7 +7,17 @@ rules:
       - '*'
     apiGroups:
       - cpd.ibm.com
-      - ca.cpd.ibm.com
     resources:
       - ibmcpds
+  - verbs:
+      - '*'
+    apiGroups:
+     - ca.cpd.ibm.com
+    resources
       - caservices
+  - verbs:
+      - '*'
+    apiGroups:
+      - db2u.databases.ibm.com
+    resources
+      - db2uinstances
