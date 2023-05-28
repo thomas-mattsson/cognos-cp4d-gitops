@@ -4,7 +4,6 @@ metadata:
   name: roks-db2-root-no-squash
   annotations:
     argocd.argoproj.io/hook: PreSync
-  namespace: openshift-gitops
 spec:
   template:
     spec:
@@ -22,5 +21,5 @@ spec:
                       -- oc debug {} \
                       -- chroot /host sh -c 'grep "^Domain = slnfsv4.coms" /etc/idmapd.conf || ( sed -i "s/.*Domain =.*/Domain = slnfsv4.com/g" /etc/idmapd.conf; nfsidmap -c; rpc.idmapd )'
       restartPolicy: Never
-      serviceAccountName: openshift-gitops-argocd-application-controller
+      serviceAccountName: account-cp4d-db2uinstance-cognos
   backoffLimit: 4
