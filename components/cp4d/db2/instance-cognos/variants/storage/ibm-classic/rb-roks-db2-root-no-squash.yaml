@@ -1,7 +1,7 @@
 kind: ClusterRoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
-  name: rb-roks-db2-root-no-squash.yaml
+  name: rb-roks-db2-root-no-squash
 subjects:
   - kind: ServiceAccount
     name: account-cp4d-db2uinstance-cognos
