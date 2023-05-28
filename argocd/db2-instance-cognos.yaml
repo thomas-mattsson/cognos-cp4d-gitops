@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: db2-instance-cognos
+  namespace: openshift-gitops
+  annotations:
+    argocd.argoproj.io/sync-wave: "150"
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: cp4d
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: ./envs/ibm-classic/db2/instance-cognos
+    targetRevision: 'HEAD'
+    repoURL: https://github.com/thomas-mattsson/cognos-cp4d-gitops.git
+  syncPolicy:
+    automated:
+      selfHeal: true
