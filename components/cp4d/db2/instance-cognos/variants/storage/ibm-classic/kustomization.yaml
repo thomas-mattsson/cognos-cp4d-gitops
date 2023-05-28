@@ -3,6 +3,8 @@ kind: Component
 
 resources:
 - job-roks-db2-root-no-squash.yaml
+- rb-roks-db2-root-no-squash.yaml
+- role-roks-db2-root-no-squash.yaml
 
 patchesStrategicMerge:
 - storage.yaml
