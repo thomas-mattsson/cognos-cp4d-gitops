@@ -10,4 +10,11 @@ rules:
       - ""
     resources:
       - nodes
+  - verbs:
+      - get
+      - list
+      - create
+    apiGroups:
+      - ""
+    resources:
       - namespaces
