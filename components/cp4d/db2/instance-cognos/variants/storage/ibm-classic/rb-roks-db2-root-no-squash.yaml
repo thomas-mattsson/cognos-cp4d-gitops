@@ -4,7 +4,7 @@ metadata:
   name: rb-roks-db2-root-no-squash
 subjects:
   - kind: ServiceAccount
-    name: account-cp4d-db2uinstance-cognos
+    name: sa-roks-db2-root-no-squash
     namespace: cp4d
 roleRef:
   apiGroup: rbac.authorization.k8s.io
