@@ -13,7 +13,7 @@ spec:
     server: https://kubernetes.default.svc
   project: default
   source:
-    path: ./components/cp4d/db2/addon
+    path: ./components/cp4d/db2/addon/base
     targetRevision: 'HEAD'
     repoURL: https://github.com/thomas-mattsson/cognos-cp4d-gitops.git
   syncPolicy:
