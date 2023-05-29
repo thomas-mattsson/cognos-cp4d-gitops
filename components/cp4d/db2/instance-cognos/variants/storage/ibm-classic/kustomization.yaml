@@ -6,6 +6,7 @@ resources:
 - rb-roks-db2-root-no-squash.yaml
 - role-roks-db2-root-no-squash.yaml
 - sa-roks-db2-root-no-squash.yaml
+- rb-roks-db2-root-no-squash-scc.yaml
 
 patchesStrategicMerge:
 - storage.yaml
