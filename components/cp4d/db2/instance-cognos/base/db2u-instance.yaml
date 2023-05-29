@@ -1,25 +1,42 @@
 apiVersion: db2u.databases.ibm.com/v1
-kind: Db2uInstance
+kind: Db2uCluster
 metadata:
-  name: db2uinstance-cognos
   labels:
-    app.kubernetes.io/instance: db2u-operator
-    app.kubernetes.io/name: db2u-operator
-    app.kubernetes.io/managed-by: Db2U-Team
+    cpd_db2: db2oltp
+    db2u/cpdbr: db2u
+  name: db2oltp-cognos
+  namespace: cp4d
 spec:
+  size: 1
   license:
     accept: true
-  account:
-    securityConfig:
-      privilegedSysctlInit: true
   environment:
-    partitionConfig:
-      volumePerPartition: true
-      total: 2
-    databases:
-      - name: BLUDB
+    database:
+      name: BLUDB
+      settings:
+        dftPageSize: '16384'
+      ssl:
+        certLabel: CN=zen-ca-cert
+        secretName: db2oltp-internal-tls
     dbType: db2oltp
-    disableNodePortService: true
+#    instance:
+#      dbmConfig:
+#        SRVCON_PW_PLUGIN: IBMIAMauthpwfile
+#        group_plugin: IBMIAMauthgroup
+#        srvcon_auth: GSS_SERVER_ENCRYPT
+#        srvcon_gssplugin_list: IBMIAMauth
+#      password: x-P_I-6W8b90%iRw
+#      registry:
+#        DB2AUTH: 'OSAUTHDB,ALLOW_LOCAL_FALLBACK,PLUGIN_AUTO_RELOAD'
+#        DB2_FMP_RUN_AS_CONNECTED_USER: 'NO'
+  advOpts:
+    db2SecurityPlugin: cloud_gss_plugin
+  version: 11.5.8.0-cn2
   storage: [] # PATCHED_BY_KUSTOMIZE
-  nodes: 1
-  version: s11.5.8.0-cn2
+  volumeSources:
+    - visibility:
+        - db2u
+      volumeSource:
+        secret:
+          secretName: zen-service-broker-secret
+
