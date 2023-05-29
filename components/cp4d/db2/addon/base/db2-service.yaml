@@ -1,0 +1,10 @@
+apiVersion: databases.cpd.ibm.com/v1
+kind: Db2oltpService
+metadata:
+  name: db2oltp-cr
+  namespace: cp4d
+spec:
+  license:
+    accept: true
+    license: Enterprise
+  version: 4.6.4
