@@ -18,7 +18,7 @@ spec:
               set -x
               oc get no -l node-role.kubernetes.io/worker --no-headers -o name | \
                   xargs -I {} \
-                      -- oc debug {} \
+                      -- oc debug -n cp4d {} \
                       -- chroot /host sh -c 'grep "^Domain = slnfsv4.coms" /etc/idmapd.conf || ( sed -i "s/.*Domain =.*/Domain = slnfsv4.com/g" /etc/idmapd.conf; nfsidmap -c; rpc.idmapd )'
       restartPolicy: Never
       serviceAccountName: sa-roks-db2-root-no-squash
