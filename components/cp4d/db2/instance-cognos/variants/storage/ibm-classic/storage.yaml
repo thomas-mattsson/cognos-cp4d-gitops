@@ -1,5 +1,5 @@
 apiVersion: db2u.databases.ibm.com/v1
-kind: Db2uInstance
+kind: Db2uCluster
 metadata:
   name: db2oltp-cognos
 spec:
