@@ -5,7 +5,6 @@ metadata:
     cpd_db2: db2oltp
     db2u/cpdbr: db2u
   name: db2oltp-cognos
-  namespace: cp4d
 spec:
   size: 1
   license:
