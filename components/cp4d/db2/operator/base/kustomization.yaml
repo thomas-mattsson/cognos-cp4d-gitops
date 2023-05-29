@@ -4,4 +4,4 @@ kind: Kustomization
 resources:
   - cm-namespace-scope.yaml
   - subscription.yaml
-
+  - db2oltp-catalog-source.yaml
