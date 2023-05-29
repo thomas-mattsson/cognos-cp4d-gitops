@@ -20,6 +20,7 @@ rules:
     resources:
       - namespaces
       - pods
+      - pods/log
   - verbs:
       - use 
     apiGroups:
