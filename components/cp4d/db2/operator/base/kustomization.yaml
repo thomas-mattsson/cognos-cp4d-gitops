@@ -5,3 +5,4 @@ resources:
   - cm-namespace-scope.yaml
   - subscription.yaml
   - db2oltp-catalog-source.yaml
+  - db2addon-subscription.yaml
