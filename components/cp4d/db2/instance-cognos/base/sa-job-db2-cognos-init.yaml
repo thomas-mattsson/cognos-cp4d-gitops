@@ -1,0 +1,4 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: sa-job-db2-cognos-init
