@@ -33,3 +33,9 @@ rules:
       - db2u.databases.ibm.com
     resources:
       - db2uinstances
+  - verbs:
+      - '*'
+    apiGroups:
+      - databases.cpd.ibm.com
+    resources:
+      - db2oltpservices
