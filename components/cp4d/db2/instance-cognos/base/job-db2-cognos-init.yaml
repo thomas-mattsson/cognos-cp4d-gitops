@@ -10,10 +10,11 @@ spec:
     metadata:
       name: db2-cognos-init
     spec:
+      serviceAccount: sa-job-db2-cognos-init
       containers:
         - name: call-db2
           image: quay.io/openshift/origin-cli:latest
-          command: ["/bin/sh"]
+          command: ["oc"]
           env:
             - name: DB2PASSWORD
               valueFrom:
@@ -21,12 +22,19 @@ spec:
                   name: c-db2oltp-cognos-instancepassword
                   key: password
           args:
-            - -c
+            - exec
+            - '-i'
+            - c-db2oltp-cognos-db2u-0
+            - '-c'
+            - db2u
+            - '--'
+            - bash
+            - '-c'
             - |
               cd /mnt/blumeta0/home/db2inst1/sqllib
               . ./db2profile   
 
-              db2 CONNECT to BLUDB user db2inst1 using $DB2PASSWORD 
+              db2 CONNECT to BLUDB user db2inst1 using $DB2PASSWORD
               db2 UPDATE DATABASE CONFIGURATION USING APPLHEAPSZ 1024 DEFERRED; 
               db2 UPDATE DATABASE CONFIGURATION USING LOCKTIMEOUT 240 DEFERRED;
               db2 CREATE BUFFERPOOL CMDB_08KBP IMMEDIATE SIZE 1000 PAGESIZE 8K;
