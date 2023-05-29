@@ -1,11 +1,11 @@
 apiVersion: operators.coreos.com/v1alpha1
 kind: Subscription
 metadata:
-  name: db2u-operator
-  namespace: openshift-operators
+  name: ibm-db2uoperator-catalog-subscription
+  generation: 1
 spec:
-  channel: v110508.0
-  installPlanApproval: Automatic
+  channel: v3.2
   name: db2u-operator
-  source: ibm-operator-catalog
+  installPlanApproval: Automatic
+  source: ibm-db2uoperator-catalog
   sourceNamespace: openshift-marketplace
