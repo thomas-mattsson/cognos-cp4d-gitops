@@ -11,7 +11,7 @@ spec:
         resources:
           requests:
             storage: 100Gi
-        storageClassName: ibmc-block-gold
+        storageClassName: ibmc-file-gold-gid
       type: create
     - name: data
       spec:
