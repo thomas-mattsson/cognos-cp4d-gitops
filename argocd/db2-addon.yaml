@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: db2-addon
+  namespace: openshift-gitops
+  annotations:
+    argocd.argoproj.io/sync-wave: "100"
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: cp4d
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: ./components/cp4d/db2/addon
+    targetRevision: 'HEAD'
+    repoURL: https://github.com/thomas-mattsson/cognos-cp4d-gitops.git
+  syncPolicy:
+    automated:
+      selfHeal: true
