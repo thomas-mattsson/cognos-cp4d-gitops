@@ -1,20 +1,46 @@
 apiVersion: db2u.databases.ibm.com/v1
 kind: Db2uInstance
 metadata:
-  name: db2uinstance-cognos
+  name: db2oltp-cognos
 spec:
   storage:
-    - type: create
-      name: meta
+    - name: meta
       spec:
         accessModes:
           - ReadWriteMany
         resources:
           requests:
-            storage: 50Gi
+            storage: 100Gi
+        storageClassName: ibmc-block-gold
+      type: create
+    - name: data
+      spec:
+        accessModes:
+          - ReadWriteMany
+        resources:
+          requests:
+            storage: 100Gi
         storageClassName: ibmc-file-gold-gid
-    - type: template
-      name: data
+      type: create
+    - name: backup
+      spec:
+        accessModes:
+          - ReadWriteMany
+        resources:
+          requests:
+            storage: 100Gi
+        storageClassName: ibmc-file-gold-gid
+      type: create
+    - name: archivelogs
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 25Gi
+        storageClassName: ibmc-block-gold
+      type: template
+    - name: activelogs
       spec:
         accessModes:
           - ReadWriteOnce
@@ -22,17 +48,8 @@ spec:
           requests:
             storage: 100Gi
         storageClassName: ibmc-block-gold
-    - type: create
-      name: backup
-      spec:
-        accessModes:
-          - ReadWriteMany
-        resources:
-          requests:
-            storage: 100Gi
-        storageClassName: ibmc-file-gold-gid
-    - type: template
-      name: tempts
+      type: template
+    - name: tempts
       spec:
         accessModes:
           - ReadWriteOnce
@@ -40,12 +57,4 @@ spec:
           requests:
             storage: 10Gi
         storageClassName: ibmc-block-gold
-    - type: create
-      name: archivelogs
-      spec:
-        accessModes:
-          - ReadWriteOnce
-        resources:
-          requests:
-            storage: 25Gi
-        storageClassName: ibmc-file-gold-gid
+      type: template
