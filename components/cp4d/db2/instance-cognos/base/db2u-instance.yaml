@@ -28,8 +28,8 @@ spec:
 #      registry:
 #        DB2AUTH: 'OSAUTHDB,ALLOW_LOCAL_FALLBACK,PLUGIN_AUTO_RELOAD'
 #        DB2_FMP_RUN_AS_CONNECTED_USER: 'NO'
-  advOpts:
-    db2SecurityPlugin: cloud_gss_plugin
+#  advOpts:
+#    db2SecurityPlugin: cloud_gss_plugin
   version: 11.5.8.0-cn2
   storage: [] # PATCHED_BY_KUSTOMIZE
   volumeSources:
