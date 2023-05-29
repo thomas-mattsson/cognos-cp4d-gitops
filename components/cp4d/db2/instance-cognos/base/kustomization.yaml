@@ -3,4 +3,7 @@ kind: Kustomization
 
 resources:
   - db2u-instance.yaml
+  - sa-job-db2-cognos-init.yaml
+  - role-job-db2-cognos-init.yaml
+  - rb-job-db2-cognos-init.yaml
   - job-db2-cognos-init.yaml
