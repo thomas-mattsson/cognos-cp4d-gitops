@@ -20,7 +20,7 @@ spec:
     automated:
       selfHeal: true
   ignoreDifferences:
-  - group: db2u.databases.ibm.com/v1
+  - group: db2u.databases.ibm.com
     kind: Db2uCluster
     jsonPointers:
     - /spec/environment/database/ssl/secretName
