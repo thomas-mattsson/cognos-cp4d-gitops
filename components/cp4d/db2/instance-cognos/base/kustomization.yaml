@@ -7,4 +7,4 @@ resources:
   - role-job-db2-cognos-init.yaml
   - rb-job-db2-cognos-init.yaml
   - job-db2-cognos-init.yaml
-  - job-create-db2-cognos-secret.yaml
+  - job-create-db2-cognos-connection.yaml
