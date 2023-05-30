@@ -30,7 +30,7 @@ spec:
             - '-c'
             - |
               set -euo pipefail
-              TOKEN=$(curl -k --request POST \
+              TOKEN=$(curl -ks --request POST \
                 --url https://internal-nginx-svc.cp4d.svc:12443/icp4d-api/v1/authorize \
                 --header 'content-type: application/json' \
                 --data '{"username":"admin","password":"'"$CP4DPASSWORD"'"}' | python3 -c "import sys, json; print(json.load(sys.stdin)['token'])")
@@ -52,11 +52,11 @@ spec:
               #     "vault_urn": "0000000000:internal"
               # }'
 
-              CATALOG=$(curl -k -X GET \
+              CATALOG=$(curl -ks -X GET \
                 https://internal-nginx-svc.cp4d.svc:12443/v2/catalogs \
                 -H 'Authorization: Bearer '"$TOKEN" | python3 -c "import sys, json; print(json.load(sys.stdin)['catalogs'][0]['metadata']['guid'])")
 
-              CONNECTION_COUNT=$(curl -k -X GET \
+              CONNECTION_COUNT=$(curl -ks -X GET \
                 https://internal-nginx-svc.cp4d.svc:12443/v2/connections?catalog_id=$CATALOG \
                 -H 'Authorization: Bearer '"$TOKEN" | python3 -c "import sys, json; print(json.load(sys.stdin)['total_count'])")
 
@@ -82,6 +82,6 @@ spec:
                       "username_password_security":"clear_text"
                     },
                     "origin_country":"us"
-                }'
+                }' > /dev/null
 
       restartPolicy: Never
