@@ -26,6 +26,11 @@ spec:
                 secretKeyRef:
                   name: admin-user-details
                   key: initial_admin_password
+            - name: DB2CA
+              valueFrom:
+                secretKeyRef:
+                  name: db2oltp-internal-tls
+                  key: ca.crt
           args:
             - '-c'
             - |
@@ -79,7 +84,8 @@ spec:
                       "port":"50001",
                       "password": "'"$DB2PASSWORD"'",
                       "username": "db2inst1",
-                      "username_password_security":"clear_text"
+                      "username_password_security":"clear_text",
+                      "ssl_certificate":"'"$DB2CA"'"
                     },
                     "origin_country":"us"
                 }' > /dev/null
