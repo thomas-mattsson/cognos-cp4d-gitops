@@ -65,7 +65,7 @@ spec:
                 exit 0
               fi
 
-              curl -k --fail -X POST \
+              curl -kfs -X POST \
                   https://internal-nginx-svc.cp4d.svc:12443/v2/connections?catalog_id=$CATALOG \
                   -H 'Authorization: Bearer '"$TOKEN" \
                   -H 'Content-Type: application/json' \
