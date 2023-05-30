@@ -1,0 +1,78 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: db2-cognos-create-connection
+  annotations:
+    argocd.argoproj.io/hook: PostSync
+spec:
+  selector: {}
+  template:
+    metadata:
+      name: db2-cognos-create-connection
+    spec:
+      serviceAccount: sa-job-db2-cognos-init
+      containers:
+        - name: call-cp4d
+          image: quay.io/openshift/origin-cli:latest
+          command: ["bash"]
+          env:
+            - name: DB2PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: c-db2oltp-cognos-instancepassword
+                  key: password
+            - name: CP4DPASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: admin-user-details
+                  key: initial_admin_password
+          args:
+            - '-c'
+            - |
+              set -x
+              TOKEN=$(curl -k --request POST \
+                --url https://internal-nginx-svc.cp4d.svc:12443/icp4d-api/v1/authorize \
+                --header 'content-type: application/json' \
+                --data '{"username":"admin","password":"'"$CP4DPASSWORD"'"}' | python3 -c "import sys, json; print(json.load(sys.stdin)['token'])")
+
+              # curl -k -X POST \
+              #   https://internal-nginx-svc.cp4d.svc:12443/zen-data/v2/secrets \
+              #   -H 'Authorization: Bearer '"$TOKEN" \
+              #   -H 'Content-Type: application/json' \
+              # -d '{
+              #     "secret_name": "db2-cognos-credentials",
+              #     "description": "Login credentials to the DB2 used for Cognos Analytics",
+              #     "secret": {
+              #         "credentials": {
+              #             "username": "db2inst1",
+              #             "password": "'"$DB2PASSWORD"'"
+              #         }
+              #     },    
+              #     "type": "credentials",
+              #     "vault_urn": "0000000000:internal"
+              # }'
+
+              CATALOG=$(curl -k -X GET \
+                https://internal-nginx-svc.cp4d.svc:12443/v2/catalogs \
+                -H 'Authorization: Bearer '"$TOKEN" | python3 -c "import sys, json; print(json.load(sys.stdin)['catalogs'][0]['metadata']['guid'])")
+
+              curl -k --fail -X POST \
+                  https://internal-nginx-svc.cp4d.svc:12443/v2/connections?catalog_id=$CATALOG \
+                  -H 'Authorization: Bearer '"$TOKEN" \
+                  -H 'Content-Type: application/json' \
+                -d '{
+                  "datasource_type": "8c1a4480-1c29-4b33-9086-9cb799d7b157",
+                  "name":"Db2-Cognos",
+                    "properties": {
+                      "ssl":"true",
+                      "database":"BLUDB",
+                      "host":"c-db2oltp-cognos-db2u.cp4d.svc",
+                      "port":"50001",
+                      "password": "'"$DB2PASSWORD"'",
+                      "username": "db2inst1",
+                      "username_password_security":"clear_text"
+                    },
+                    "origin_country":"us"
+                }'
+
+      restartPolicy: Never
