@@ -28,8 +28,6 @@ spec:
               cd /mnt/blumeta0/home/db2inst1/sqllib
               . ./db2profile   
               
-              echo $DB2PASSWORD
-
               db2 CONNECT to BLUDB user db2inst1 using $DB2PASSWORD
               db2 UPDATE DATABASE CONFIGURATION USING APPLHEAPSZ 1024 DEFERRED; 
               db2 UPDATE DATABASE CONFIGURATION USING LOCKTIMEOUT 240 DEFERRED;
