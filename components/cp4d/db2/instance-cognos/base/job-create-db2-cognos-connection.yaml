@@ -10,6 +10,10 @@ spec:
     metadata:
       name: db2-cognos-create-connection
     spec:
+      volumes:
+        - name: ca-volume
+          secret:
+            secretName: db2oltp-internal-tls
       serviceAccount: sa-job-db2-cognos-init
       containers:
         - name: call-cp4d
@@ -26,11 +30,10 @@ spec:
                 secretKeyRef:
                   name: admin-user-details
                   key: initial_admin_password
-            - name: DB2CA
-              valueFrom:
-                secretKeyRef:
-                  name: db2oltp-internal-tls
-                  key: ca.crt
+          volumeMounts:
+            - name: ca-volume
+              readOnly: true
+              mountPath: "/etc/ca-volume"
           args:
             - '-c'
             - |
@@ -69,6 +72,8 @@ spec:
                 echo "A connection already exists"
                 exit 0
               fi
+
+              DB2CA=$(awk '{printf "%s\\n", $0}' /etc/ca-volume/ca.crt)
 
               curl -kfs -X POST \
                   https://internal-nginx-svc.cp4d.svc:12443/v2/connections?catalog_id=$CATALOG \
